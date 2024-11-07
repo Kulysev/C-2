@@ -1,0 +1,263 @@
+1.
+#include <iostream>
+using namespace std;
+
+int main() {
+    double a, b, c;
+    cout << "Введите стороны треугольника a, b, c: ";
+    cin >> a >> b >> c;
+
+    if (a + b > c && a + c > b && b + c > a) {
+        cout << "Стороны могут образовать треугольник." << endl;
+        if (a == b && b == c) {
+            cout << "Треугольник равносторонний." << endl;
+        } else if (a == b || b == c || a == c) {
+            cout << "Треугольник равнобедренный." << endl;
+        } else {
+            cout << "Треугольник разносторонний." << endl;
+        }
+    } else {
+        cout << "Стороны не могут образовать треугольник." << endl;
+    }
+
+    return 0;
+}
+2.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a, b, c;
+    cout << "Введите стороны треугольника a, b, c: ";
+    cin >> a >> b >> c;
+
+    if (a + b > c && a + c > b && b + c > a) {
+        double a2 = a * a, b2 = b * b, c2 = c * c;
+        if (a2 + b2 > c2 && a2 + c2 > b2 && b2 + c2 > a2) {
+            cout << "Треугольник остроугольный." << endl;
+        } else if (a2 + b2 == c2 || a2 + c2 == b2 || b2 + c2 == a2) {
+            cout << "Треугольник прямоугольный." << endl;
+        } else {
+            cout << "Треугольник тупоугольный." << endl;
+        }
+    } else {
+        cout << "Стороны не могут образовать треугольник." << endl;
+    }
+
+    return 0;
+}
+3.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double xa, ya, xb, yb, xc, yc;
+    cout << "Введите координаты A(xa, ya), B(xb, yb), C(xc, yc): ";
+    cin >> xa >> ya >> xb >> yb >> xc >> yc;
+
+    double a = sqrt(pow(xb - xc, 2) + pow(yb - yc, 2));
+    double b = sqrt(pow(xa - xc, 2) + pow(ya - yc, 2));
+    double c = sqrt(pow(xa - xb, 2) + pow(ya - yb, 2));
+
+    if (a + b > c && a + c > b && b + c > a) {
+        double a2 = a * a, b2 = b * b, c2 = c * c;
+        if (a2 + b2 > c2 && a2 + c2 > b2 && b2 + c2 > a2) {
+            cout << "Треугольник остроугольный." << endl;
+        } else if (a2 + b2 == c2 || a2 + c2 == b2 || b2 + c2 == a2) {
+            cout << "Треугольник прямоугольный." << endl;
+        } else {
+            cout << "Треугольник тупоугольный." << endl;
+        }
+    } else {
+        cout << "Стороны не могут образовать треугольник." << endl;
+    }
+
+    return 0;
+}
+4.
+#include <iostream>
+using namespace std;
+
+int main() {
+    double a, b, c;
+    cout << "Введите a, b, c: ";
+    cin >> a >> b >> c;
+
+    for (double x = 1; x < 100; x++) {
+        for (double y = 1; y < 100; y++) {
+            for (double z = 1; z < 100; z++) {
+                if (a == x + y && b == y + z && c == x + z) {
+                    cout << "Существует такие положительные x, y, z." << endl;
+                    return 0;
+                }
+            }
+        }
+    }
+    cout << "Не существует таких положительных x, y, z." << endl
+    return 0;
+}
+5.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double distance(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+bool isRectangle(double a, double b, double c, double d) {
+    return (a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a);
+}
+
+int main() {
+    double xa, ya, xb, yb, xc, yc, xd, yd;
+    cout << "Введите координаты A(xa, ya), B(xb, yb), C(xc, yc), D(xd, yd): ";
+    cin >> xa >> ya >> xb >> yb >> xc >> yc >> xd >> yd;
+
+    double AB = distance(xa, ya, xb, yb);
+    double BC = distance(xb, yb, xc, yc);
+    double CD = distance(xc, yc, xd, yd);
+    double DA = distance(xd, yd, xa, ya);
+    double AC = distance(xa, ya, xc, yc);
+    double BD = distance(xb, yb, xd, yd);
+
+    if (AB == CD && BC == DA) {
+        if (isRectangle(AB, BC, AC, BD)) {
+            cout << "Четырехугольник - прямоугольник." << endl;
+        } else {
+            cout << "Четырехугольник - параллелограмм." << endl;
+        }
+    } else if ((AB == CD && BC != DA) || (BC == DA && AB != CD)) {
+        cout << "Четырехугольник - трапеция." << endl;
+    } else {
+        cout << "Четырехугольник - произвольный четырехугольник." << endl;
+    }
+
+    return 0;
+}
+6.
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    double a, b, c, r, s;
+    cout << "Введите размеры кирпича a, b, c: ";
+    cin >> a >> b >> c;
+    cout << "Введите размеры отверстия r, s: ";
+    cin >> r >> s;
+
+    double brick[3] = {a, b, c};
+    double hole[2] = {r, s};
+
+    sort(brick, brick + 3);
+    sort(hole, hole + 2);
+
+    if (brick[0] <= hole[0] && brick[1] <= hole[1]) {
+        cout << "Кирпич пройдет через отверстие." << endl;
+    } else {
+        cout << "Кирпич не пройдет через отверстие." << endl;
+    }
+
+    return 0;
+}
+7.
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    double r, p, q;
+    cout << "Введите радиус шара r: ";
+    cin >> r;
+    cout << "Введите диагонали ромбообразного отверстия p и q: ";
+    cin >> p >> q;
+
+    double d = min(p, q) / 2; // Полуразмеры отверстия
+    if (r <= d) {
+        cout << "Шар пройдет через ромбообразное отверстие." << endl;
+    } else {
+        cout << "Шар не пройдет через ромбообразное отверстие." << endl;
+    }
+
+    return 0;
+}
+8.
+#include <iostream>
+using namespace std;
+
+int main() {
+    double A, B, C, R, S, T;
+    cout << "Введите размеры коробки A, B, C: ";
+    cin >> A >> B >> C;
+    cout << "Введите размеры посылки R, S, T: ";
+    cin >> R >> S >> T;
+
+    if ((R <= A && S <= B && T <= C) || (R <= A && T <= B && S <= C) ||
+        (S <= A && R <= B && T <= C) || (S <= A && T <= B && R <= C) ||
+        (T <= A && S <= B && R <= C)) {
+        cout << "Посылка поместится в коробку." << endl;
+    } else {
+        cout << "Посылка не поместится в коробку." << endl;
+    }
+
+    return 0;
+}
+9.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int k, l, m;
+    cout << "Введите три целых числа k, l, m: ";
+    cin >> k >> l >> m;
+
+    cout << "Пары кратных:" << endl;
+    if (k % l == 0) {
+        cout << k << " и " << l << " кратны." << endl;
+    }
+    if (k % m == 0) {
+        cout << k << " и " << m << " кратны." << endl;
+    }
+    if (l % k == 0) {
+        cout << l << " и " << k << " кратны." << endl;
+    }
+    if (l % m == 0) {
+        cout << l << " и " << m << " кратны." << endl;
+    }
+    if (m % k == 0) {
+        cout << m << " и " << k << " кратны." << endl;
+    }
+    if (m % l == 0) {
+        cout << m << " и " << l << " кратны." << endl;
+    }
+
+    return 0;
+}
+10.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number;
+    cout << "Введите трехзначное число: ";
+    cin >> number;
+
+    if (number < 100 || number > 999) {
+        cout << "Число должно быть трехзначным." << endl;
+        return 1;
+    }
+
+    int sum_of_digits = (number / 100) + ((number / 10) % 10) + (number % 10);
+
+    if (sum_of_digits % 3 == 0) {
+        cout << "Число " << number << " делится на 3." << endl;
+    } else {
+        cout << "Число " << number << " не делится на 3." << endl;
+    }
+
+    return 0;
+}
+
